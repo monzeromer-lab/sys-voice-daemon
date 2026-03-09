@@ -1,0 +1,27 @@
+Source: vosk-dictation
+Section: utils
+Priority: optional
+Maintainer: VoskDictation Maintainers <noreply@example.com>
+Build-Depends: debhelper-compat (= 13), cargo, rustc, libasound2-dev, pkg-config
+Standards-Version: 4.6.2
+Homepage: https://github.com/your-org/vosk-dictation
+Rules-Requires-Root: no
+
+Package: vosk-dictation
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, libasound2, libx11-6
+Recommends: libgtk-4-1
+Suggests: vosk-model-small-en-us
+Description: Offline voice-to-text daemon for Linux
+ A privacy-first, fully offline voice dictation daemon that integrates
+ natively with the Linux desktop environment. It monitors system-wide
+ input focus, automatically activates microphone listening when a text
+ field is active, and injects transcribed text directly into the active
+ window using a kernel-level virtual keyboard (uinput).
+ .
+ Features:
+  - 100% offline speech recognition via Vosk
+  - Context-aware focus detection (X11 and Wayland)
+  - Virtual keyboard text injection via uinput
+  - GNOME desktop integration (optional HUD overlay)
+  - Sub-500ms transcription latency

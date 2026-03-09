@@ -1,0 +1,23 @@
+[Unit]
+Description=VoskDictation - Offline Voice-to-Text Daemon
+Documentation=https://github.com/your-org/vosk-dictation
+After=graphical-session.target pipewire.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/vosk-dictation
+Restart=on-failure
+RestartSec=3
+
+# Environment
+Environment=RUST_LOG=info
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=true
+ReadWritePaths=/dev/uinput
+
+[Install]
+WantedBy=graphical-session.target

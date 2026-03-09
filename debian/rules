@@ -1,0 +1,34 @@
+#!/usr/bin/make -f
+
+export CARGO_HOME = $(CURDIR)/debian/.cargo
+VOSK_VENDOR = $(CURDIR)/vendor/vosk-linux-x86_64-0.3.45
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	LIBRARY_PATH="$(VOSK_VENDOR):$$LIBRARY_PATH" cargo build --release
+
+override_dh_auto_install:
+	# Binary
+	install -Dm755 target/release/assistant debian/vosk-dictation/usr/bin/vosk-dictation
+	# Vosk shared library
+	install -Dm644 $(VOSK_VENDOR)/libvosk.so debian/vosk-dictation/usr/lib/libvosk.so
+	# udev rules
+	install -Dm644 dist/udev/99-vosk-dictation.rules debian/vosk-dictation/etc/udev/rules.d/99-vosk-dictation.rules
+	# systemd user service
+	install -Dm644 dist/systemd/vosk-dictation.service debian/vosk-dictation/usr/lib/systemd/user/vosk-dictation.service
+	# GNOME Shell extension
+	install -dm755 debian/vosk-dictation/usr/share/gnome-shell/extensions/vosk-dictation@vosk-dictation
+	install -Dm644 gnome-extension/vosk-dictation@vosk-dictation/metadata.json debian/vosk-dictation/usr/share/gnome-shell/extensions/vosk-dictation@vosk-dictation/metadata.json
+	install -Dm644 gnome-extension/vosk-dictation@vosk-dictation/extension.js debian/vosk-dictation/usr/share/gnome-shell/extensions/vosk-dictation@vosk-dictation/extension.js
+	install -Dm644 gnome-extension/vosk-dictation@vosk-dictation/stylesheet.css debian/vosk-dictation/usr/share/gnome-shell/extensions/vosk-dictation@vosk-dictation/stylesheet.css
+
+override_dh_auto_test:
+	@echo "Skipping tests (require audio hardware)"
+
+override_dh_auto_clean:
+	cargo clean || true
+
+override_dh_shlibdeps:
+	dh_shlibdeps -l$(VOSK_VENDOR)

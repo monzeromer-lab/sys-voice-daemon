@@ -1,0 +1,7 @@
+{
+    "uuid": "vosk-dictation@vosk-dictation",
+    "name": "VoskDictation",
+    "description": "Panel control for the VoskDictation offline voice-to-text daemon. Enable, disable, or quit the daemon from the GNOME top panel.",
+    "shell-version": ["46"],
+    "version": 1
+}

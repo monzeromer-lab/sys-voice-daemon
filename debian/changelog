@@ -1,0 +1,9 @@
+vosk-dictation (0.1.0-1) unstable; urgency=low
+
+  * Initial release.
+  * Core audio capture via rodio with Vosk speech-to-text.
+  * Text injection via uinput virtual keyboard.
+  * Focus detection for X11 (x11rb) and Wayland (AT-SPI2/zbus).
+  * Optional GTK4 floating HUD overlay.
+
+ -- VoskDictation Maintainers <noreply@example.com>  Sun, 09 Mar 2026 12:00:00 +0000

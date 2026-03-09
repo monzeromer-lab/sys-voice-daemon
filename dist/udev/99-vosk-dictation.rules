@@ -1,0 +1,3 @@
+# Allow members of the "input" group to read/write /dev/uinput
+# Required by vosk-dictation to create a virtual keyboard for text injection.
+KERNEL=="uinput", MODE="0660", GROUP="input", TAG+="uaccess"

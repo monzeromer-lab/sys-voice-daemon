@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+ldconfig
+
+udevadm control --reload-rules 2>/dev/null || true
+udevadm trigger 2>/dev/null || true
+
+echo ""
+echo "vosk-dictation installed successfully!"
+echo ""
+echo "Next steps:"
+echo "  1. Add your user to the input group:  sudo usermod -aG input \$USER"
+echo "  2. Download a Vosk model:"
+echo "       mkdir -p ~/.local/share/vosk"
+echo "       wget https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip -O /tmp/model.zip"
+echo "       unzip /tmp/model.zip -d /tmp && mv /tmp/vosk-model-small-en-us-0.15 ~/.local/share/vosk/model"
+echo "  3. Log out and back in, then run:  vosk-dictation"
+echo ""
+
+#DEBHELPER#
+
+exit 0
