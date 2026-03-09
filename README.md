@@ -1,6 +1,6 @@
 # VoskDictation
 
-Offline voice-to-text daemon for Linux. A privacy-first, fully offline voice dictation utility that integrates natively with the Linux desktop environment.
+Offline voice-to-text daemon for Linux. A privacy-first, fully offline voice dictation utility that integrates natively with the Linux ang Gnome desktop environment.
 
 ## Features
 
